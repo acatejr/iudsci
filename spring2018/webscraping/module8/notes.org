@@ -1,0 +1,7 @@
+* Scrapy
+scrapy shell https://docs.python.org/3/
+dir(response) -- Attributes of response object.
+response.css('table.contentstable') - select items
+response.css('table.contentstable a.biglink::text').extract() - select item text
+response.xapth('//table[@class="contentstable"]//a[@class="biglink"]/@href').extract()
+response.xapth('//table[@class="contentstable"]//a[@class="biglink"]/text').extract()

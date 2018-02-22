@@ -1,0 +1,7 @@
+*.bak
+*.pyc
+__pycache__/
+module6/config.py
+*.log
+.vscode/
+.env

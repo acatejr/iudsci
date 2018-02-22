@@ -1,0 +1,20 @@
+# Notes below.
+
+    # fill in your code
+    
+    # fields to be stored in CSV file
+    # tweet.id,
+    # tweet.lang,
+    # tweet.user.screen_name,
+    # tweet.text.encode('utf-8')
+
+
+# search_tag = '#NASA'
+# for tweet in tweepy.Cursor(api.search, search_tag).items(100):
+
+# timeline_cursor = tweepy.Cursor(api.home_timeline).items(40)
+# while True:
+#     print(timeline_cursor.next().text)
+#     print('\n', '-'*60, '\n')    
+
+#for t in limit_handled(tweepy.Cursor(api.search, search_tag).items()):

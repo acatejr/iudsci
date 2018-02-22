@@ -1,0 +1,12 @@
+    def parse_page_info(self, response):
+    
+        elements = response.xpath('//div[@class="listResults"]//div[@class="-job-summary "]')
+        for e in elements:        
+            job_item = JobItem()
+            title = e.css('div.-title h2.g-col10 a.job-link::text').extract()[0]
+            company = e.css('div.-company div.-name::text').extract()[0]            
+            location = e.css('div.-company div.-location::text').extract()[0]
+            job_item['title'] = title
+            job_item['company'] = " ".join(company.split()) # Remove redundent white spaces
+            job_item['location'] = " ".join(location.split()).strip("-") # Remove redundent white spaces
+            yield job_item

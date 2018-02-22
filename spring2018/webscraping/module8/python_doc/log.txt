@@ -1,0 +1,22 @@
+2018-02-03 20:54:28.926537: Spider opened
+2018-02-03 20:54:29.276061: Section 'What's new in Python 3.6?' processed
+2018-02-03 20:54:29.276061: Section 'Tutorial' processed
+2018-02-03 20:54:29.276061: Section 'Library Reference' processed
+2018-02-03 20:54:29.276061: Section 'Language Reference' processed
+2018-02-03 20:54:29.276061: Section 'Python Setup and Usage' processed
+2018-02-03 20:54:29.276061: Section 'Python HOWTOs' processed
+2018-02-03 20:54:29.276061: Section 'Installing Python Modules' processed
+2018-02-03 20:54:29.291619: Section 'Distributing Python Modules' processed
+2018-02-03 20:54:29.291619: Section 'Extending and Embedding' processed
+2018-02-03 20:54:29.291619: Section 'Python/C API' processed
+2018-02-03 20:54:29.291619: Section 'FAQs' processed
+2018-02-03 20:54:29.291619: Section 'Global Module Index' processed
+2018-02-03 20:54:29.291619: Section 'General Index' processed
+2018-02-03 20:54:29.291619: Section 'Glossary' processed
+2018-02-03 20:54:29.291619: Section 'Search page' processed
+2018-02-03 20:54:29.291619: Section 'Complete Table of Contents' processed
+2018-02-03 20:54:29.291619: Section 'Reporting bugs' processed
+2018-02-03 20:54:29.291619: Section 'About the documentation' processed
+2018-02-03 20:54:29.291619: Section 'History and License of Python' processed
+2018-02-03 20:54:29.291619: Section 'Copyright' processed
+2018-02-03 20:54:29.291619: Spider closed
