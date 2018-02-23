@@ -1,0 +1,113 @@
+---
+title: "Assignment 2"
+author: "Averill Cate, Jr"
+date: "February 23, 2018"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Assignment 2
+## 1. What are the different data types supported by R?  
+R's data types are vectors, arrays, data frames, lists, factors,  matrices, numeric, character and logical and integer.
+
+Create a vector consisting of the first thousand numbers.
+```{r}
+v = 1L:1000L
+tail(v, 10)
+```
+## 2. Using the control structures, write a program to
+
+### a. find the odd numbers from the above created vector
+I did this two ways.  
+```{r}
+# With control structures
+find.odds <- function(values) {
+  l = c(0)
+  for(v in values) {
+    if (values[[v]] %% 2 == 1) {
+        l = c(l, values[[v]])
+    }
+  }
+  return(l)
+}
+head(find.odds(v), 20)
+tail(find.odds(v), 20)
+
+# Without control structures
+find.odds <- function(values) {
+  result <- values[c(T,F)]
+  return(result)
+}
+head(find.odds(v), 20)
+tail(find.odds(v), 20)
+```
+
+
+### b. Find all the numbers divisible by 7.
+I did this two ways.  
+```{r}
+# With control structures
+divby.seven <- function(values) {
+  l = c(0)
+  for(v in values) {
+    if (values[[v]] %% 7 == 0) {
+        l = c(l, values[[v]])
+    }
+  }
+  return(l)
+
+}
+head(divby.seven(v), 20)
+tail(divby.seven(v), 20)
+
+# Without control structures
+divby.seven <- function(values) {
+  indexes = values %% 7
+  return(values[!indexes])
+}
+head(divby.seven(v), 20)
+tail(divby.seven(v), 20)
+```
+
+## 3. Write a function in R which
+
+### a. Takes an input of three sides and tells whether it is an equilateral triangle, isosceles or scalene triangle.
+```{r}
+triangle.type <- function(s1, s2, s3) {
+  data = c(s1, s2, s3)
+  fdata = factor(data)
+  levs = nlevels(fdata)
+  if ( levs == 2) {
+    return("isoceles")
+  } else if (levs == 1) {
+    return("equilateral")
+  } else {
+    return("scalene")
+  }
+}
+
+print(triangle.type(1,2,3))
+print(triangle.type(2,2,3))
+print(triangle.type(2,2,2))
+print(triangle.type(4,1,2))
+print(triangle.type(4,4,4))
+```
+
+
+### b. Takes two points (x,y) and finds the Cartesian distance between the 2D plane.
+```{r}
+cartesian.distance <- function(p1, p2) {
+  dist = NULL
+  t = (p2 - p1)^2
+  s = sum(t)
+  d = sqrt(s)
+  return(d)
+}
+print(cartesian.distance(c(1,1), c(2,2)))
+print(cartesian.distance(c(1,1), c(4,7)))
+```
