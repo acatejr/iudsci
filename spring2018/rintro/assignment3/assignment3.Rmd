@@ -1,0 +1,37 @@
+---
+title: "Introduction to R - Assignment 2"
+author: Averill Cate, Jr
+date: Spring 2018
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+# 1. For missouri.tract dataframe, print the first 30 rows of data.  
+```{r}
+library(UScensus2000tract)
+library(dplyr)
+```
+# 2. Find the datatype of all the columns and comment about the N/A values in each column.  
+```{r}
+# Show the column types
+data("missouri.tract")
+mtd = missouri.tract@data
+str(mtd)
+```
+
+```{r}
+# Show some data
+head(missouri.tract@data, 125)
+```
+Missing data could be due to many factors.  One reason could be an error in data entry, maybe an omission or incorrect data type was entered.  Also, this is cenuse/demographic data and geospatial data, so there may be no data points for certain geographic regions based on ethnicity.
+
+# 3. Find the unique values for at least 5 columns of the above dataset
+```{r}
+# Data columns
+mt = missouri.tract@data[4:9]
+head(mt, 10)
+# Unique values for all of the shosen data columns
+mt_unique = lapply(mt, n_distinct)
+mt_unique
+```
