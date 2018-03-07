@@ -1,0 +1,52 @@
+---
+title: "Introduction to R - Assignment 4"
+author: "Averill Cate, Jr"
+date: "March 6, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Introduction to R - Assignment 4
+For the assignment use the nasaweather library
+```{r}
+library(dplyr)
+library(grid)
+library(nasaweather)
+```
+```{r}
+str(nasaweather::storms)
+```
+```{r}
+head(nasaweather::storms)
+
+```
+## 1. Report all of the hurricanes in Michigan state occuring in the month of October.  
+```{r}
+storms = nasaweather::storms
+oct_hurricanes = subset(storms, storms$month == 10 && storms$type == 'Hurricane')
+
+# Reporting the unique names
+oct_hurricanes = unique(oct_hurricanes$name)
+head(oct_hurricanes)
+```
+## 2. Provide the names of storms that occurred between the years of 1995-97 which occurred after 6 PM and pressure above the first quartile.  
+```{r}
+storms_between_1995_and_1997 = subset(storms, storms$year >= 1995 && storms$year <= 1997)
+# Report the unique names
+print("Storms between 1995 and 1997, inclusive.")
+head(unique(storms_between_1995_and_1997$name))
+```
+```{r}
+after_6_pm = subset(storms_between_1995_and_1997, storms_between_1995_and_1997$hour >= 18)
+print("Storms between 1995 and 1997, inclusive. And, after 6pm (18hr)")
+head(after_6_pm)
+```
+```{r}
+# The first quartile
+q1 = quantile(after_6_pm$pressure)[2]
+greater_than_q1 = subset(after_6_pm, after_6_pm$pressure > q1)
+print("Storms between 1995 and 1997, inclusive. And, after 6pm (18hr).  And pressure > Q1 pressure.")
+head(greater_than_q1, 15)
+```
