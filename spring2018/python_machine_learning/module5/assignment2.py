@@ -92,6 +92,21 @@ def crimes_by_type(crime):
     results = data[data[crime] > avg]
     return results.ADDRESS.values
 
+def crime_by_time_range(from_time, to_time):
+    """ Problem 6. Crime rate by date range.
+    """
+    ftime = datetime.datetime.strptime(from_time, '%m/%d/%Y')
+    ttime = datetime.datetime.strptime(to_time, '%m/%d/%Y')
+    
+    file_name = BASE_DIR + '/timeData2.csv'
+    data = pd.read_csv(file_name, sep=',')
+    data.Dates = data.Dates.apply(lambda d: datetime.datetime.strptime(d, "%m/%d/%Y %H:%M"))
+    data.index = data.Dates
+    filtered_data = data.ix[(data.Dates >= ftime) & (data.Dates <= ttime)]
+    grouped = filtered_data.groupby('Category')[['Category']].count()
+    return(grouped.idxmax()[0])
+    
+
 if __name__ == '__main__':
     # Dec to bin iterative
     print("The integer 12 in binary is {}.".format(dec_to_bin_iter(12)))
@@ -127,3 +142,15 @@ if __name__ == '__main__':
     addresses = crimes_by_type(crime_name)
     for a in addresses:
         print(a)
+
+
+    # Not the most efficient.  Ideally, would only open data file once for each date range, but it works.
+    print('\nCrime Category Frequency')
+    print('='*70)
+    the_crime = crime_by_time_range('1/01/2015', '12/31/2015')
+    print('Highest crime between {} and {} is {}'.format('1/01/2015', '12/31/2015', the_crime))
+
+    print('\nCrime Category Frequency')
+    print('='*70)
+    the_crime = crime_by_time_range('1/01/2003', '12/31/2005')
+    print('Highest crime between {} and {} is {}'.format('1/01/2003', '12/31/2005', the_crime))
