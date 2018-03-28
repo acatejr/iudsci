@@ -79,7 +79,7 @@ def dec_to_bin_rec(n):
         r = n % 2
         return str(dec_to_bin_rec(q)) + str(r)
 
-def crimes(crime):
+def crimes_by_type(crime):
     """ Problem 5.  Calculates the mean of that crime, i.e., average number 
     of times that crime has happened at addresses.  The function should return 
     all the address (may be in a list) where this crime has occurred more than 
@@ -117,13 +117,13 @@ if __name__ == '__main__':
     crime_name = 'EXTORTION'
     print("\nThe following addresses exceed the average rate for {}".format(crime_name))
     print("="*70)
-    addresses = crimes(crime_name)
+    addresses = crimes_by_type(crime_name)
     for a in addresses:
         print(a)
 
     crime_name = 'DRUNKENNESS'
     print("\nThe following addresses exceed the average rate for {}".format(crime_name))
     print("="*70)
-    addresses = crimes(crime_name)
+    addresses = crimes_by_type(crime_name)
     for a in addresses:
         print(a)
