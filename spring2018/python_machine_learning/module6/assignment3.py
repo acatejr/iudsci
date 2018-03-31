@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[2]:
 
 
 # Assignment 3 - Part 1
@@ -35,13 +35,13 @@ plt.rcParams["figure.figsize"] = [10, 20]
 plt.show()
 
 
-# In[2]:
+# In[3]:
 
 
 data
 
 
-# In[17]:
+# In[28]:
 
 
 # Assignment 3 - Part 2
@@ -50,20 +50,13 @@ data
 
 labels = data['Business'].values
 emoticons = data.columns.values[1:]
-# print(labels, emoticons)
 
-for e in emoticons[:1]:
+for e in emoticons:
     vals = data[e].values
-    print(e, vals, vals.sum())
-# labels = 'Python', 'C++', 'Ruby', 'Java'
-# sizes = [215, 130, 245, 210]
-# colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
-# explode = (0.1, 0, 0, 0)  # explode 1st slice
- 
-# # Plot
-# plt.pie(sizes, explode=explode, labels=labels, colors=colors,
-#         autopct='%1.1f%%', shadow=True, startangle=140)
- 
-# plt.axis('equal')
-# plt.show()
+    if vals.sum() > 0:
+        sizes = vals / vals.sum() * 100
+        plt.figure()
+        plt.title(e)
+        plt.pie(sizes, labels = labels)
+        plt.axis('equal')
 
