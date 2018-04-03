@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[66]:
 
 
 # Assignment 3 - Part 1
@@ -33,15 +33,18 @@ plt.legend()
 plt.tight_layout()
 plt.rcParams["figure.figsize"] = [10, 20]
 plt.show()
+plt.clf()
+plt.cla()
+plt.close()
 
 
-# In[3]:
+# In[67]:
 
 
 data
 
 
-# In[28]:
+# In[68]:
 
 
 # Assignment 3 - Part 2
@@ -59,4 +62,50 @@ for e in emoticons:
         plt.title(e)
         plt.pie(sizes, labels = labels)
         plt.axis('equal')
+
+plt.clf()
+plt.cla()
+plt.close()       
+
+
+# In[69]:
+
+
+# Assignment 3 - Part 3. Generate a word cloud of your favorite news article or story or anything. 
+# This word cloud should contain words having 4 letters or more.
+from wordcloud import WordCloud
+
+text = open('words.txt').read()
+wordcloud = WordCloud().generate(text)
+plt.imshow(wordcloud)
+plt.axis("off")
+# Code borrowed from course module instructions
+wordcloud = WordCloud(background_color="white", max_words=2000,max_font_size=40, relative_scaling=.4).generate(text)
+plt.figure()
+plt.imshow(wordcloud)
+# plt.axis("off")
+plt.show()
+plt.clf()
+plt.cla()
+plt.close()
+
+
+# In[70]:
+
+
+"""
+Assignment 3 - Part 4
+You have been given a file ReviewID.txt. It has 10646 records in it, each record is made up of two fields
+separated by a colon: like AzSn8aTOyVTUePaIQtTUYA:es . The first field is review ID and the second field
+is language in which reviews has been written. Read this file and create a bar graph showing the percentage
+of the reviews written in a particular language. The aim of this problem is to generate a graph using which
+we can do a comparative analysis of the languages used for writing reviews.
+"""
+review_data = pd.read_csv('ReviewID.txt', delimiter=':', header=None, names=['id', 'lang'])
+review_data.head(10)
+
+# Group by language
+grouped_reviews = review_data.groupby(['lang']).count()
+grouped_reviews.plot.bar()
+plt.show()
 
