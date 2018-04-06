@@ -1,0 +1,14 @@
+-- insert into book values (2001,'Theory of Computation',200);
+-- insert into book values (2002, 'Deductive Logic', 75);
+-- insert into book values (2003, 'Discrete Math' ,120);
+-- insert into book values (2004, 'Linear Algebra' ,19);
+-- insert into book values (2005, 'Quantum Mechanics' ,30);
+-- insert into book values (2006, 'Analysis of Algorithms',15);
+-- insert into book values (2007, 'Graph Theory',40);
+-- insert into book values (2008, 'Compilers',150);
+-- insert into book values (2009, 'Particle Phyics',130);
+-- insert into book values (2010, 'Complexity Theory',150)
+-- insert into student values (1001,'Jean',3.96), (1002,'Maria',4.00), (1003,'Anna',3.49), (1004,'Chin',4.00), (1005,'John',3.99), (1006,'Ryan',4.00), (1007,'Catherine',3.97), (1008,'Emma',4.00), (1009,'Jan',4.00);
+-- insert into majorsin values (1001,'Physics'), (1001,'Math'), (1002,'CS'), (1002,'Math'), (1003,'Math'), (1004,'CS'), (1006,'CS'), (1007,'Physics'), (1007,'CS'), (1008,'Physics'), (1009,'CS');
+-- insert into cites values (2001,2002), (2001,2007), (2003,2001), (2003,2004), (2003,2002);
+-- insert into buys values (1001,2009), (1001,2002), (1002,2002), (1002,2001), (1003,2002), (1004,2006), (1004,2008), (1006,2006), (1006,2008), (1007,2001), (1007,2002), (1007,2003), (1007,2008), (1007,2009), (1007,2010), (1007,2007);

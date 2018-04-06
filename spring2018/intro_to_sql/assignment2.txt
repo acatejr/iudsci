@@ -1,0 +1,99 @@
+Problem: Answer each of the following questions briefly. The questions are based on the 
+following relational schema:
+=============================================================================================
+Emp(eid: integer, ename: string, age: integer, salary: real)
+Works(eid: integer, did: integer, pcttime: integer)
+Dept(did: integer, dname: string, budget: real, managerid: integer)
+
+1) Give an example of a foreign key constraint that involves the Dept relation. What
+are the options for enforcing this constraint when a user attempts to delete a Dept
+record?
+
+Given the ER data above Dept has a foreign key relationship with the Works entity.  
+Since it is possible for a company to close a department but keep the employees, 
+they might be moved to another department you would not want a cascade on delete 
+when deleting a Department record.  
+
+The constraint on Dept would be:
+foreign key (did) references Works
+
+The constraint on Works would be:
+foreign key (did) references references Dept
+foreign key (eid) references references Emp
+
+No cascade on delete in either case.
+
+2) Write the SQL statements required to create the preceding relations, including
+appropriate versions of all primary and foreign key integrity constraints.
+Emp:
+----------------
+primary key eid
+
+Works:
+---------------
+foreign key (did) references references Dept
+foreign key (eid) references references Emp
+
+Dept
+--------------
+primary key did
+foreign key (did) references Works
+
+3) Define the Dept relation in SQL so that every department is guaranteed to have a manager.
+create table Dept (
+    did integer not null, 
+    dname string, budget real, 
+    managerid integer not null,
+    primary key (did)
+)
+
+4) Write an SQL statement to add John Doe as an employee with eid = 101, age = 32 and salary = 15,000.
+
+insert into Emp values (101, 'John Doe', 32, 15000);
+
+5) Write an SQL statement to give every employee a 10 percent raise.
+
+update table Emp set salary = salary * 1.1;
+
+6) Write an SQL statement to delete the Toy department. Given the referential
+integrity constraints you chose for this schema, explain what happens when this
+statement is executed.
+
+delete from Dept where dbname = 'Toy'
+
+Given the constraints I assumed, the employees would still be in the database, but 
+they would not be part of that department.
+
+Problem: First, take a brief look at the attached .txt files: student.txt, majorsin.txt,
+book.txt, cites.txt and buys.txt. They contain data as comma-separated records. It is
+better to have an idea what the fields look like before you create any table. Create a
+database with the name UNIVERSITY. Then create tables in UNIVERSITY according to the
+following schemas:
+
+Student(Sid; Sname;GPA)
+MajorsIn(Sid;Major)
+Book(BookNo; Title; Price)
+Cites(BookNo;CitedBookNo)
+Buys(Sid;BookNo)
+
+The relation MajorsIn stores students and their majors. A student can have multiple
+majors, but we also allow that a student can have no major. A tuple (b,c) in the relation
+Cites indicates that the book with book number b cites the book with book number c.
+Note that a book may cite multiple other books. Also, a book does not have to cited. The
+keys of the relations are the underlined attributes.
+Define data types for the various attributes as well as primary and foreign key constraints.
+Where appropriate, add “ON DELETE CASCADE” statements with the foreign key
+constraints.
+Hint: As a feature, MySQL does not allow you to write foreign key constraints like FOREIGN
+KEY (BookNo) REFERENCES Book even if there is a field named 'BookNo' in Book. You must
+use: FOREIGN KEY (BookNo) REFERENCES Book(BookNo).
+Then use MySQL's LOAD statement to load data from the four .txt files. An example LOAD
+statement is like: LOAD DATA INFILE ‘/path/to/student.txt’ INTO TABLE Student FIELDS TERMINATED BY ',';
+Validate the data in each tables using the SELECT statement (Explanation of how SELECT
+works will be discussed in the next section, for now just run the below queries to ensure
+data is loaded correctly)
+
+SELECT * FROM table_name;
+
+I used sql inserts to load the dat instead of "load data infile". I also ran the select * 
+on the tables and could see the data.

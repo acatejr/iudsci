@@ -1,0 +1,11 @@
+2001,Theory of Computation,200
+2002,Deductive Logic,75
+2003,Discrete Math,120
+2004,Linear Algebra,19
+2005,Quantum Mechanics,30
+2006,Analysis of Algorithms,15
+2007,Graph Theory,40
+2008,Compilers,150
+2009,Particle Phyics,130
+2010,Complexity Theory,150
+
