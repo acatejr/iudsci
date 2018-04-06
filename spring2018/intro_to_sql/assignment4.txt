@@ -1,0 +1,142 @@
+Assignment 4
+Averill Cate
+
+1. Find the details of the customers who live in Chicago or contains the string "Mall" in their address.
+
+select * from customers where city = 'Chicago' or address like '%Mall%';
+
+2. Find the customer names and their corresponding order names, which were purchased in 2016.
+
+select 
+    customers.customername,
+    orders.ordername
+from customers 
+join orders on orders.customerid = customers.customerid
+where orders.purchasedate like '_/__/2016';
+
+3. Find the order name, purchase date and price details of customers who reside in Bloomington.
+
+select orders.ordername, orders.purchasedate, orders.price
+from orders
+join customers on customers.customerid = orders.customerid
+where customers.city = 'Bloomington';
+
+4. Perform LEFT JOIN on the two tables and output the results.
+show tables;
++------------------+
+| Tables_in_testdb |
++------------------+
+| customers        |
+| orders           |
++------------------+
+2 rows in set (0.00 sec)
+
+select customers.*, orders.* from customers left join orders on orders.customerid = customers.customerid;
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+| customerid | customername   | address               | city        | postalcode | country | id   | ordername        | customerid | purchasedate | price |
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+|         41 | Suhas Jagadish | 720 S College Mall Rd | Bloomington |      47401 | USA     |  101 | Earphones        |         41 | 6/25/2016    |    25 |
+|         43 | Jessy Pinkman  | 1320 S Walnut Road    | Chicago     |      60290 | USA     |  102 | Sony Playstation |         43 | 5/20/2016    |   300 |
+|         44 | Arjun Rao      | 240 N Harrison St     | Bloomington |      47401 | USA     |  103 | Nexus 5x         |         44 | 12/30/2015   |   429 |
+|         42 | Walter White   | 2411 E 2nd St.        | Bloomington |      47401 | USA     | NULL | NULL             |       NULL | NULL         |  NULL |
+|         45 | Saul Goodman   | 233 S Wacker Dr       | Chicago     |      60290 | USA     | NULL | NULL             |       NULL | NULL         |  NULL |
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+
+5. Perform FULL JOIN on the two tables and output the results.
+MySQL does not seem to have "FULL JOIN".  Online searches suggested something like this.
+
+(select customers.*, orders.* from customers left join orders on orders.customerid = customers.customerid)
+union all
+(select customers.*, orders.* from customers right join orders on orders.customerid = customers.customerid);
+
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+| customerid | customername   | address               | city        | postalcode | country | id   | ordername        | customerid | purchasedate | price |
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+|         41 | Suhas Jagadish | 720 S College Mall Rd | Bloomington |      47401 | USA     |  101 | Earphones        |         41 | 6/25/2016    |    25 |
+|         43 | Jessy Pinkman  | 1320 S Walnut Road    | Chicago     |      60290 | USA     |  102 | Sony Playstation |         43 | 5/20/2016    |   300 |
+|         44 | Arjun Rao      | 240 N Harrison St     | Bloomington |      47401 | USA     |  103 | Nexus 5x         |         44 | 12/30/2015   |   429 |
+|         42 | Walter White   | 2411 E 2nd St.        | Bloomington |      47401 | USA     | NULL | NULL             |       NULL | NULL         |  NULL |
+|         45 | Saul Goodman   | 233 S Wacker Dr       | Chicago     |      60290 | USA     | NULL | NULL             |       NULL | NULL         |  NULL |
+|         41 | Suhas Jagadish | 720 S College Mall Rd | Bloomington |      47401 | USA     |  101 | Earphones        |         41 | 6/25/2016    |    25 |
+|         43 | Jessy Pinkman  | 1320 S Walnut Road    | Chicago     |      60290 | USA     |  102 | Sony Playstation |         43 | 5/20/2016    |   300 |
+|         44 | Arjun Rao      | 240 N Harrison St     | Bloomington |      47401 | USA     |  103 | Nexus 5x         |         44 | 12/30/2015   |   429 |
++------------+----------------+-----------------------+-------------+------------+---------+------+------------------+------------+--------------+-------+
+
+
+Boat Reservation Problem
+---------------------------------------------------
+1) Find the details of sailors whose name contains 'o' at the second position or whose rating is greater than 7.
+
+select * from sailors where sname like '_o%' or rating > 7;
+
+2) Find the names of sailors who have reserved boat #103.
+
+select sailers.sname, reserves.bid
+from sailors
+join reserves on reserves.sid = sailers.sid
+where reservers.bid = 103;
+
+3) Find the names of sailors who have reserved a red boat AND has a rating 7.
+
+select sailers.sname
+from sailors
+join reserves on reserves.sid = sailers.sid
+join boat on boat.bid = reserves.bid
+where boat.color = 'red' and sailors.rating = 7;
+
+4) Find the names of sailors who have reserved a red OR a green boat.
+
+select sailers.sname
+from sailors
+join reserves on reserves.sid = sailers.sid
+join boat on boat.bid = reserves.bid
+where boat.color = 'red' or boat.color = 'green';
+
+5) Find the names of sailors who have reserved a red AND a green boat.
+
+select sailers.sname
+from sailors
+join reserves on reserves.sid = sailers.sid
+join boat on boat.bid = reserves.bid
+where boat.color = 'red' and boat.color = 'green';
+
+Problem: Consider the following relation schemas:
+=====================================================================================
+Student(Sid, Sname, GPA, Major)
+Instructor(InstructorId, Iname, Deptname)
+Enroll(Sid, Cno, InstructorId, Grade)
+
+Imagine the records for each of the tables and answer the below queries:
+
+1) Find the names of students who are enrolled in courses offered by instructors in the 
+"CS" department (So you need to have value in ‘Deptname’ as CS).
+
+select student.sname, enroll.grade
+from students
+join enroll on enroll.sid = student.sid
+join instructor on instructor.instructorid = enroll.instructorid
+where instructor.deptname = 'CS';
+
+2) Find the names and grades of the enrolled students who have their gpa more than 3.5 OR an ‘A’ grade.
+
+select student.sname, enroll.grade
+from students
+join enroll on enroll.sid = student.sid
+where student.gpa > 3.5 or enroll.grade = 'A';
+
+3) Find the names of the students and their majors who belong to “CS” department.
+
+select student.sname, student.major
+from students
+join enroll on enroll.sid = student.sid
+join instructor on instructor.instructorid = enroll.instructorid
+where instructor.deptname = 'CS';
+
+4) Find the ID and names of students who are taught by at least two instructors.
+
+select student.sid, student.name, count(instructor.id) as cnt
+from students
+join enroll on enroll.sid = student.sid
+join instructor on instructor.instructorid = enroll.instructorid
+group by instructor.id
+where cnt > 1;
