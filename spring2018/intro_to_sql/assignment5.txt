@@ -96,6 +96,7 @@ drop view view book_info;
 drop view update_book_cost as
 
 NOTE: Create Aliases for all the queries to make the code more readable.
-I don't have the schema in a Mysql instance, nor do I have the data.  Regardless, 
-queries on the tables that are used by the views would return whatever records 
-are in the tables.  Dropping views does not affect tables;
+Sorry, I am a bit pressed for time over the next few weeks.  I don't have the schema 
+in a Mysql instance, nor do I have the data.  Regardless, queries on the tables 
+that are used by the views would return whatever records are in the tables.  
+Dropping views does not affect tables;
