@@ -1,0 +1,101 @@
+Assignment 5
+
+Averill Cate, Jr
+
+1) Find the ID and Names of the members who have reserved the book "Game of Thrones" or "Lord of the Rings".
+
+select members.id, members.names
+from members
+join reserves on reserves.m_id = members.m_id
+join books on books.b_id = reserves.b_id
+where books.b_title = 'Game of Thrones' or books.b_title = 'Lord of the Rings';
+
+2) Find the ID, Name and reserved date of the members who reserved both "Lord of the Rings" and "Dexter".
+
+select members.id, members.names, reserves.date
+from members
+join reserves on reserves.m_id = members.m_id
+join books on books.b_id = reserves.b_id
+where books.b_title = 'Dexter' and books.b_title = 'Lord of the Rings';
+
+3) Find the unique books that have been reserved.
+
+select distinct books.b_title
+from books, reserves
+where books.b_id = reserves.b_id;
+
+4) Find the details of the members who have reserved the book B222 but not A102.
+
+-- Using this query because list of output columns don't match across tables.
+-- Using join.
+select members.m_id, members.name, members.designation, members.age
+from members
+join reserves on reserves.m_id = members.m_id
+where reserves.b_id = 'B222' and reserves.b_id <> 'A102';
+
+5) Find the details of the members who have reserved a book with a definite price.
+
+-- Using this query because list of output columns don't match across tables.
+-- Using join.
+select members.m_id, members.name, members.designation, members.age
+from members
+join reserves on reserves.m_id = members.m_id
+join books on books.b_id = reserves.b_id
+where books.b_price is not null;
+
+6) Find the authors of the books reserved by teachers.
+
+select books.b_author
+from books
+join reserves on reserves.b_id = books.b_id
+join members on members.m_id = members.m_id
+where books.designation = 'Teacher';
+
+7) Find the details of the members who have not reserved any book.
+
+select members.m_id, members.name, members.designation, members.age
+from members
+where members.m_id not in (select reserves.m_id from reserves)
+
+8) Create a view which captures names of the authors, their book titles and the corresponding prices.
+Can you update this view? If yes, increase the price of "Game of Thrones" by 10 percent.
+
+create view capture_names as 
+select books.b_author, books.b_title, books.b_price
+from books;
+
+Yes, the view can be an update.  The from clause only has one table.  There are not set operators in the select.
+There are not aggregate functions in the select clause.  There are now sub-queries in the where clause.
+
+create view update_book_price as 
+update books
+set books.b_price = books.b_price * 1.10
+where books.b_title = 'Game of Thrones';
+
+9) Create a view which captures the details of the books reserved after June 2016. Can you update
+this view? If yes, increase the cost of all the reserved books by $10.
+
+create view book_info as
+select books.b_id, books.b_title, books.b_author, books.b_price
+from books
+join reserves on reserves.bi_id = books.b_id
+where reserves.date > '2016-06-30';
+
+Yes, this can be an update view.  
+
+create view update_book_cost as
+update books
+set books.b_price = books.b_price + 10
+join reserves on reserves.bi_id = books.b_id
+where reserves.date > '2016-06-30';
+
+10) Delete both the views created above and display the contents of the tables post deletion.
+drop view capture_names;
+drop view update_book_price;
+drop view view book_info;
+drop view update_book_cost as
+
+NOTE: Create Aliases for all the queries to make the code more readable.
+I don't have the schema in a Mysql instance, nor do I have the data.  Regardless, 
+queries on the tables that are used by the views would return whatever records 
+are in the tables.  Dropping views does not affect tables;
